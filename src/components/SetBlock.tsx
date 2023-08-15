@@ -70,16 +70,18 @@ export const SetBlock: FC<ISetBlock> = ({onChangeMaxValue, maxValue, minValue, o
 	}
 
 	return (
-		<div className='set-block-active'>
-			{error.errorInMaxValue || error.errorInMinValue ? <div style={{color: 'red'}}>Incorrect value</div> : ''}
-			<div>Max Value</div>
-			<Input value={maxValueInput} onChange={onChangeMaxValueInputHandler} type='number'
-			       className={`set-block-input ${error.errorInMaxValue ? 'error' : 'default'}`}/>
-			<div>Min Value</div>
-			<Input value={minValueInput} onChange={onChangeMinValueInputHandler} type='number'
-			       className={`set-block-input ${error.errorInMinValue ? 'error' : 'default'}`}/>
-			<Button callback={onChangeIncBlock}
-			        className={`btn ${error.errorInMaxValue || error.errorInMinValue ? 'default' : 'active'}`}>Set</Button>
+		<div className='set-block'>
+			<div className='set-block-active'>
+				{error.errorInMaxValue || error.errorInMinValue ? <div style={{color: 'red'}}>Incorrect value</div> : ''}
+				<div>Max Value</div>
+				<Input value={maxValueInput} onChange={onChangeMaxValueInputHandler} type='number'
+				       className={`set-block-input ${error.errorInMaxValue ? 'error' : 'default'}`}/>
+				<div>Min Value</div>
+				<Input value={minValueInput} onChange={onChangeMinValueInputHandler} type='number'
+				       className={`set-block-input ${error.errorInMinValue ? 'error' : 'default'}`}/>
+				<Button callback={onChangeIncBlock}
+				        className={`btn ${error.errorInMaxValue || error.errorInMinValue ? 'default' : 'active'}`}>Set</Button>
+			</div>
 		</div>
 	)
 }

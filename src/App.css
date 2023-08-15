@@ -101,3 +101,10 @@ body {
 .set-block-input.error {
     background-color: red;
 }
+
+.moving-block {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 10px;
+}
