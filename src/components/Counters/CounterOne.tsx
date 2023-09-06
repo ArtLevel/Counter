@@ -1,6 +1,6 @@
-import { SetBlock } from './SetBlock'
-import { IncBlock } from './IncBlock'
-import { Button } from './Button'
+import { SetBlock } from '../common/SetBlock'
+import { IncBlock } from '../common/IncBlock'
+import { Button } from '../common/Button'
 import React, { useEffect, useState } from 'react'
 
 export const CounterOne = () => {

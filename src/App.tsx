@@ -1,11 +1,13 @@
 import React from 'react'
+import { CounterOne } from './components/Counters/CounterOne'
+import { CounterTwo } from './components/Counters/CounterTwo'
 import './App.css'
-import { CounterOne } from './components/CounterOne'
 
 function App() {
 	return (
 		<div>
 			<CounterOne />
+			<CounterTwo />
 		</div>
 	)
 }
