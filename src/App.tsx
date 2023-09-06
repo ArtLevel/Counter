@@ -1,11 +1,12 @@
 import React from 'react'
 import { CounterTwo } from './components/Counters/CounterTwo'
+import { CounterOne } from './components/Counters/CounterOne'
 import './App.css'
 
-function App() {
+const App = () => {
 	return (
 		<div>
-			{/*<CounterOne />*/}
+			<CounterOne />
 			<CounterTwo />
 		</div>
 	)
