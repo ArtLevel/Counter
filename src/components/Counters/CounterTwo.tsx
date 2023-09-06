@@ -8,9 +8,9 @@ export const CounterTwo = () => {
 	const [minValue, setMinValue] = useState(0)
 
 	useEffect(() => {
-		const maxValue = localStorage.getItem('maxValue')
-		const minValue = localStorage.getItem('minValue')
-		const score = localStorage.getItem('score')
+		const maxValue = localStorage.getItem('maxValueInCounterOne')
+		const minValue = localStorage.getItem('minValueInCounterTwo')
+		const score = localStorage.getItem('scoreInCounterTwo')
 
 		if (score) setScore(Number(score))
 		if (maxValue) setMaxValue(Number(maxValue))
@@ -18,9 +18,9 @@ export const CounterTwo = () => {
 	}, [])
 
 	useEffect(() => {
-		localStorage.setItem('maxValue', `${maxValue}`)
-		localStorage.setItem('minValue', `${minValue}`)
-		localStorage.setItem('score', `${score}`)
+		localStorage.setItem('maxValueInCounterOne', `${maxValue}`)
+		localStorage.setItem('minValueInCounterTwo', `${minValue}`)
+		localStorage.setItem('scoreInCounterTwo', `${score}`)
 	}, [minValue, maxValue, score])
 
 	const incScore = () => {

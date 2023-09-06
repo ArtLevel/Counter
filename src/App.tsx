@@ -1,7 +1,7 @@
 import React from 'react'
-import { CounterTwo } from './components/Counters/CounterTwo'
-import { CounterOne } from './components/Counters/CounterOne'
 import './App.css'
+import { CounterOne } from './components/Counters/CounterOne'
+import { CounterTwo } from './components/Counters/CounterTwo'
 
 const App = () => {
 	return (
