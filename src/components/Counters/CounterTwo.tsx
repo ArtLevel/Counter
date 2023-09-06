@@ -1,13 +1,11 @@
 import { SetBlock } from '../common/SetBlock'
 import { IncBlock } from '../common/IncBlock'
-import { Button } from '../common/Button'
 import React, { useEffect, useState } from 'react'
 
 export const CounterTwo = () => {
 	const [score, setScore] = useState(0)
 	const [maxValue, setMaxValue] = useState(5)
 	const [minValue, setMinValue] = useState(0)
-	const [show, setShow] = useState(false)
 
 	useEffect(() => {
 		const maxValue = localStorage.getItem('maxValue')
@@ -37,22 +35,16 @@ export const CounterTwo = () => {
 		setScore(value)
 	}
 
-	const onShowHandler = () => setShow(prevState => !prevState)
-
 	return (
 		<div className='wrapper'>
 			<div className='container'>
-				{
-					show ? (
-						<SetBlock maxValue={maxValue} minValue={minValue} onChangeMaxValue={onChangeMaxValue}
-						          onChangeMinValue={onChangeMinValue} />
-					) : (
-						<IncBlock minValue={minValue} maxValue={maxValue} score={score} incScore={incScore}
-						          removeScore={removeScore} />
-					)
-				}
-				<div className='moving-block'>
-					<Button callback={onShowHandler} className='btn active'>{!show ? 'Show Set Block' : 'Hide Set Block'}</Button>
+				<div>
+					<IncBlock minValue={minValue} maxValue={maxValue} score={score} incScore={incScore}
+					          removeScore={removeScore} />
+				</div>
+				<div>
+					<SetBlock maxValue={maxValue} minValue={minValue} onChangeMaxValue={onChangeMaxValue}
+					          onChangeMinValue={onChangeMinValue} />
 				</div>
 			</div>
 		</div>
