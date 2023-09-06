@@ -10,17 +10,12 @@ interface ISetBlock {
 }
 
 export const SetBlock: FC<ISetBlock> = ({onChangeMaxValue, maxValue, minValue, onChangeMinValue}) => {
-	const [maxValueInput, setMaxValueInput] = useState(5)
-	const [minValueInput, setMinValueInput] = useState(0)
+	const [maxValueInput, setMaxValueInput] = useState(maxValue)
+	const [minValueInput, setMinValueInput] = useState(minValue)
 	const [error, setError] = useState({
 		errorInMaxValue: false,
 		errorInMinValue: false,
 	})
-
-	useEffect(() => {
-		setMaxValueInput(maxValue)
-		setMinValueInput(minValue)
-	}, [maxValue, minValue])
 
 	const onChangeIncBlock = () => {
 		if (!error.errorInMaxValue && !error.errorInMinValue) {
@@ -30,43 +25,29 @@ export const SetBlock: FC<ISetBlock> = ({onChangeMaxValue, maxValue, minValue, o
 	}
 
 	const onChangeMaxValueInputHandler = (value: number) => {
-		if (value > minValueInput && value > 0) {
+		if(value > minValueInput && value > 0) {
 			setMaxValueInput(value)
-			setError(prevState => {
-				return {
-					...prevState,
-					errorInMaxValue: false
-				}
-			})
+			setError(prevState => ({...prevState, errorInMaxValue: false}))
+			if(minValue < value && minValue > 0) {
+				setError({errorInMaxValue: false, errorInMinValue: false})
+			}
 			return
 		}
 		setMaxValueInput(value)
-		setError(prevState => {
-			return {
-				...prevState,
-				errorInMaxValue: true
-			}
-		})
+		setError(prevState => ({...prevState, errorInMaxValue: true}))
 	}
 
 	const onChangeMinValueInputHandler = (value: number) => {
-		if (value < maxValueInput && value >= 0) {
+		if(value < maxValueInput && value >= 0) {
 			setMinValueInput(value)
-			setError(prevState => {
-				return {
-					...prevState,
-					errorInMinValue: false
-				}
-			})
+			setError(prevState => ({...prevState, errorInMinValue: false}))
+			if(maxValue > value && maxValue > 0) {
+				setError({errorInMaxValue: false, errorInMinValue: false})
+			}
 			return
 		}
 		setMinValueInput(value)
-		setError(prevState => {
-			return {
-				...prevState,
-				errorInMinValue: true
-			}
-		})
+		setError(prevState => ({...prevState, errorInMinValue: true}))
 	}
 
 	return (

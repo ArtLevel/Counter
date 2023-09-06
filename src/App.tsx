@@ -10,7 +10,6 @@ function App() {
 	const [maxValue, setMaxValue] = useState(5)
 	const [minValue, setMinValue] = useState(0)
 	const [show, setShow] = useState(false)
-	console.log(score)
 
 	useEffect(() => {
 		const maxValue = localStorage.getItem('maxValue')
