@@ -1,6 +1,5 @@
-import React, {FC} from 'react';
-import {Input} from './Input';
-import {Button} from './Button';
+import React, { FC } from 'react'
+import { Button } from './Button'
 
 interface IIncBlock {
 	minValue: number
@@ -11,7 +10,7 @@ interface IIncBlock {
 }
 
 export const IncBlock: FC<IIncBlock> = (props) => {
-	const {score, maxValue, incScore, removeScore, minValue, ...restProps} = props
+	const { score, maxValue, incScore, removeScore, minValue, ...restProps } = props
 
 	return (
 		<>
