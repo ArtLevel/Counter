@@ -13,7 +13,6 @@ type ChangeShowOfCounterAT = {
 	newShowValue: boolean
 }
 
-
 type ActionsType = ChangeMaxValueOfCounterAT | ChangeMinValueOfCounterAT | ChangeShowOfCounterAT
 
 type CounterSettingsT = {
@@ -41,3 +40,17 @@ export const counterSettingsReducer = (state: CounterSettingsT = initialState, a
 	}
 }
 
+export const ChangeMaxValueOfCounterAC = (newMaxValue: number): ChangeMaxValueOfCounterAT => ({
+	type: 'CHANGE_MAX_VALUE_OF_COUNTER',
+	newMaxValue
+})
+
+export const ChangeMinValueOfCounterAC = (newMinValue: number): ChangeMinValueOfCounterAT => ({
+	type: 'CHANGE_MIN_VALUE_OF_COUNTER',
+	newMinValue
+})
+
+export const ChangeShowOfCounterAC = (newShowValue: boolean): ChangeShowOfCounterAT => ({
+	type: 'CHANGE_SHOW_OF_COUNTER',
+	newShowValue
+})

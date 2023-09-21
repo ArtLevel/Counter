@@ -19,3 +19,4 @@ export const counterValueReducer = (state: CounterValueT = initialState, action:
 	}
 }
 
+export const IncrementCounterAC = (): IncrementCounterAT => ({ type: 'INCREMENT_COUNTER' })
