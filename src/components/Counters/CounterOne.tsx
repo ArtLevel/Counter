@@ -1,29 +1,13 @@
 import { SetBlock } from '../common/SetBlock'
 import { IncBlock } from '../common/IncBlock'
 import { Button } from '../common/Button'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 export const CounterOne = () => {
 	const [score, setScore] = useState(0)
 	const [maxValue, setMaxValue] = useState(5)
 	const [minValue, setMinValue] = useState(0)
 	const [show, setShow] = useState(false)
-
-	useEffect(() => {
-		const maxValue = localStorage.getItem('maxValue')
-		const minValue = localStorage.getItem('minValue')
-		const score = localStorage.getItem('score')
-
-		if (score) setScore(Number(score))
-		if (maxValue) setMaxValue(Number(maxValue))
-		if (minValue) setMinValue(Number(minValue))
-	}, [])
-
-	useEffect(() => {
-		localStorage.setItem('maxValue', `${maxValue}`)
-		localStorage.setItem('minValue', `${minValue}`)
-		localStorage.setItem('score', `${score}`)
-	}, [minValue, maxValue, score])
 
 	const incScore = () => {
 		if (score < maxValue) setScore(prevState => prevState + 1)
