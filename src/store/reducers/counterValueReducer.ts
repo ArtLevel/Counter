@@ -9,13 +9,13 @@ type RemoveScoreCounterAT = {
 
 type ActionsType = IncrementCounterAT | RemoveScoreCounterAT
 
-export type CounterValuesT = { score: number }
+export type CounterValueT = { score: number }
 
-const initialState: CounterValuesT = {
+const initialState: CounterValueT = {
 	score: 0
 }
 
-export const counterValueReducer = (state: CounterValuesT = initialState, action: ActionsType): CounterValuesT => {
+export const counterValueReducer = (state: CounterValueT = initialState, action: ActionsType): CounterValueT => {
 	switch (action.type) {
 		case 'INCREMENT_COUNTER':
 			return { ...state, score: state.score + 1 }

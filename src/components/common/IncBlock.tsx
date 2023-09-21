@@ -1,16 +1,24 @@
 import React, { FC } from 'react'
 import { Button } from './Button'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppRootStoreType } from '../../store/store'
+import { CounterSettingsT } from '../../store/reducers/counterSettingsReducer'
+import { CounterValueT, IncrementCounterAC, RemoveScoreCounterAC } from '../../store/reducers/counterValueReducer'
 
 interface IIncBlock {
-	minValue: number
-	maxValue: number
-	score: number
-	incScore: () => void
-	removeScore: () => void
+
 }
 
 export const IncBlock: FC<IIncBlock> = (props) => {
-	const { score, maxValue, incScore, removeScore, minValue, ...restProps } = props
+	const dispatch = useDispatch()
+	const { score } = useSelector<AppRootStoreType, CounterValueT>(s => s.counterValue)
+	const { minValue, maxValue } = useSelector<AppRootStoreType, CounterSettingsT>(s => s.counterSettings)
+
+	const incScore = () => {
+		if (score < maxValue) dispatch(IncrementCounterAC())
+	}
+
+	const removeScore = () => dispatch(RemoveScoreCounterAC(minValue))
 
 	return (
 		<>
