@@ -1,15 +1,22 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Input } from './Input'
 import { Button } from './Button'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppRootStoreType } from '../../store/store'
+import {
+	ChangeMaxValueOfCounterAC,
+	ChangeMinValueOfCounterAC,
+	CounterSettingsT
+} from '../../store/reducers/counterSettingsReducer'
+import { RemoveScoreCounterAC } from '../../store/reducers/counterValueReducer'
 
 interface ISetBlock {
-	minValue: number
-	maxValue: number
-	onChangeMinValue: (value: number) => void
-	onChangeMaxValue: (value: number) => void
 }
 
-export const SetBlock: FC<ISetBlock> = ({ onChangeMaxValue, maxValue, minValue, onChangeMinValue }) => {
+export const SetBlock: FC<ISetBlock> = () => {
+	const dispatch = useDispatch()
+	const { minValue, maxValue } = useSelector<AppRootStoreType, CounterSettingsT>(s => s.counterSettings)
+
 	const [maxValueInput, setMaxValueInput] = useState(maxValue)
 	const [minValueInput, setMinValueInput] = useState(minValue)
 	const [error, setError] = useState({
@@ -24,8 +31,9 @@ export const SetBlock: FC<ISetBlock> = ({ onChangeMaxValue, maxValue, minValue, 
 
 	const onChangeIncBlock = () => {
 		if (!error.errorInMaxValue && !error.errorInMinValue) {
-			onChangeMaxValue(maxValueInput)
-			onChangeMinValue(minValueInput)
+			dispatch(ChangeMaxValueOfCounterAC(maxValueInput))
+			dispatch(ChangeMinValueOfCounterAC(minValueInput))
+			dispatch(RemoveScoreCounterAC(minValueInput))
 		}
 	}
 
