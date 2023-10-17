@@ -39,27 +39,27 @@ export const SetBlock: FC<ISetBlock> = memo(() => {
 
 	const onChangeMaxValueInputHandler = (value: number) => {
 		if (value > minValueInput && value > 0) {
-			setMaxValueInput(value)
+			if (value < 1000000) setMaxValueInput(value)
 			setError(prevState => ({ ...prevState, errorInMaxValue: false }))
-			if (minValue < value && minValue > 0) {
+			if (minValue < value && minValue >= 0) {
 				setError({ errorInMaxValue: false, errorInMinValue: false })
 			}
 			return
 		}
-		setMaxValueInput(value)
+		if (value < 1000000) setMaxValueInput(value)
 		setError(prevState => ({ ...prevState, errorInMaxValue: true }))
 	}
 
 	const onChangeMinValueInputHandler = (value: number) => {
 		if (value < maxValueInput && value >= 0) {
-			setMinValueInput(value)
+			if (value < 1000000) setMinValueInput(value)
 			setError(prevState => ({ ...prevState, errorInMinValue: false }))
 			if (maxValue > value && maxValue > 0) {
 				setError({ errorInMaxValue: false, errorInMinValue: false })
 			}
 			return
 		}
-		setMinValueInput(value)
+		if (value < 1000000) setMinValueInput(value)
 		setError(prevState => ({ ...prevState, errorInMinValue: true }))
 	}
 
