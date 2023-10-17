@@ -1,12 +1,12 @@
 import { SetBlock } from '../common/SetBlock'
 import { IncBlock } from '../common/IncBlock'
 import { Button } from '../common/Button'
-import React from 'react'
+import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppRootStoreType } from '../../store/store'
 import { ChangeShowOfCounterAC, CounterSettingsT } from '../../store/reducers/counterSettingsReducer'
 
-export const CounterOne = () => {
+export const CounterOne = memo(() => {
 	const dispatch = useDispatch()
 	const { show } = useSelector<AppRootStoreType, CounterSettingsT>(s => s.counterSettings)
 
@@ -27,4 +27,4 @@ export const CounterOne = () => {
 			</div>
 		</div>
 	)
-}
+})

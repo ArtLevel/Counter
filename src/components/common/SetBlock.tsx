@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, memo, useEffect, useState } from 'react'
 import { Input } from './Input'
 import { Button } from './Button'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,7 +13,7 @@ import { RemoveScoreCounterAC } from '../../store/reducers/counterValueReducer'
 interface ISetBlock {
 }
 
-export const SetBlock: FC<ISetBlock> = () => {
+export const SetBlock: FC<ISetBlock> = memo(() => {
 	const dispatch = useDispatch()
 	const { minValue, maxValue } = useSelector<AppRootStoreType, CounterSettingsT>(s => s.counterSettings)
 
@@ -78,4 +78,4 @@ export const SetBlock: FC<ISetBlock> = () => {
 			</div>
 		</div>
 	)
-}
+})

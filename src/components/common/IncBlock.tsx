@@ -1,15 +1,11 @@
-import React, { FC } from 'react'
+import React, { memo } from 'react'
 import { Button } from './Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppRootStoreType } from '../../store/store'
 import { CounterSettingsT } from '../../store/reducers/counterSettingsReducer'
 import { CounterValueT, IncrementCounterAC, RemoveScoreCounterAC } from '../../store/reducers/counterValueReducer'
 
-interface IIncBlock {
-
-}
-
-export const IncBlock: FC<IIncBlock> = (props) => {
+export const IncBlock = memo(() => {
 	const dispatch = useDispatch()
 	const { score } = useSelector<AppRootStoreType, CounterValueT>(s => s.counterValue)
 	const { minValue, maxValue } = useSelector<AppRootStoreType, CounterSettingsT>(s => s.counterSettings)
@@ -31,4 +27,4 @@ export const IncBlock: FC<IIncBlock> = (props) => {
 			</div>
 		</>
 	)
-}
+})

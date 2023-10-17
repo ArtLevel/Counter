@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, memo, ReactNode } from 'react'
 
 interface IButton {
 	callback: () => void
@@ -6,10 +6,10 @@ interface IButton {
 	className?: string
 }
 
-export const Button: FC<IButton> = (props) => {
+export const Button: FC<IButton> = memo((props) => {
 	const { callback, children, className } = props
 
 	return (
 		<button onClick={callback} className={className}>{children}</button>
 	)
-}
+})
