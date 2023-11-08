@@ -1,19 +1,14 @@
-import React, { FC, memo, useEffect, useState } from 'react'
-import { Input } from './Input'
-import { Button } from './Button'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppRootStoreType } from '../../store/store'
+import { AppRootStoreType } from '../../../../store/store'
 import {
 	ChangeMaxValueOfCounterAC,
 	ChangeMinValueOfCounterAC,
 	CounterSettingsT
-} from '../../store/reducers/counterSettingsReducer'
-import { RemoveScoreCounterAC } from '../../store/reducers/counterValueReducer'
+} from '../../../../store/reducers/counterSettingsReducer'
+import { useEffect, useState } from 'react'
+import { RemoveScoreCounterAC } from '../../../../store/reducers/counterValueReducer'
 
-interface ISetBlock {
-}
-
-export const SetBlock: FC<ISetBlock> = memo(() => {
+export const useSetBlock = () => {
 	const dispatch = useDispatch()
 	const { minValue, maxValue } = useSelector<AppRootStoreType, CounterSettingsT>(s => s.counterSettings)
 
@@ -63,19 +58,12 @@ export const SetBlock: FC<ISetBlock> = memo(() => {
 		setError(prevState => ({ ...prevState, errorInMinValue: true }))
 	}
 
-	return (
-		<div className='set-block'>
-			<div className='set-block-active'>
-				{error.errorInMaxValue || error.errorInMinValue ? <div style={{ color: 'red' }}>Incorrect value</div> : ''}
-				<div>Max Value</div>
-				<Input value={maxValueInput} onChange={onChangeMaxValueInputHandler} type='number'
-				       className={`set-block-input ${error.errorInMaxValue ? 'error' : 'default'}`} />
-				<div>Min Value</div>
-				<Input value={minValueInput} onChange={onChangeMinValueInputHandler} type='number'
-				       className={`set-block-input ${error.errorInMinValue ? 'error' : 'default'}`} />
-				<Button callback={onChangeIncBlock}
-				        className={`btn ${error.errorInMaxValue || error.errorInMinValue ? 'default' : 'active'}`}>Set</Button>
-			</div>
-		</div>
-	)
-})
+	return {
+		error,
+		minValueInput,
+		maxValueInput,
+		onChangeMinValueInputHandler,
+		onChangeMaxValueInputHandler,
+		onChangeIncBlock
+	}
+}

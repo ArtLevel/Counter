@@ -1,16 +1,11 @@
-import { SetBlock } from '../common/SetBlock'
-import { IncBlock } from '../common/IncBlock'
+import { SetBlock } from '../common/SetBlock/SetBlock'
+import { IncBlock } from '../common/IncBlock/IncBlock'
 import { Button } from '../common/Button'
 import React, { memo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppRootStoreType } from '../../store/store'
-import { ChangeShowOfCounterAC, CounterSettingsT } from '../../store/reducers/counterSettingsReducer'
+import { useCounterOne } from './hooks/useCounterOne'
 
 export const CounterOne = memo(() => {
-	const dispatch = useDispatch()
-	const { show } = useSelector<AppRootStoreType, CounterSettingsT>(s => s.counterSettings)
-
-	const onShowHandler = () => dispatch(ChangeShowOfCounterAC())
+	const { show, onShowHandler } = useCounterOne()
 
 	return (
 		<div className='wrapper'>

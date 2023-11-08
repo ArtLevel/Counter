@@ -1,13 +1,10 @@
 import React from 'react'
-import './App.css'
 import { CounterOne } from './components/Counters/CounterOne'
 
+import './App.css'
+
 const App = () => {
-	return (
-		<div>
-			<CounterOne />
-		</div>
-	)
+	return <CounterOne />
 }
 
 export default App
