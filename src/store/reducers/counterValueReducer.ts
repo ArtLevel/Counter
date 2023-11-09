@@ -1,13 +1,4 @@
-type IncrementCounterAT = {
-	type: 'INCREMENT_COUNTER'
-}
-
-type RemoveScoreCounterAT = {
-	type: 'REMOVE_SCORE_COUNTER'
-	minValue: number
-}
-
-type ActionsType = IncrementCounterAT | RemoveScoreCounterAT
+import { ActionsType, IncrementCounterAT, RemoveScoreCounterAT } from '../../types/types'
 
 export type CounterValueT = { score: number }
 

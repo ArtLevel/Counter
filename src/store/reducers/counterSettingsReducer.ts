@@ -1,30 +1,17 @@
-type ChangeMaxValueOfCounterAT = {
-	type: 'CHANGE_MAX_VALUE_OF_COUNTER',
-	newMaxValue: number
-}
-
-type ChangeMinValueOfCounterAT = {
-	type: 'CHANGE_MIN_VALUE_OF_COUNTER',
-	newMinValue: number
-}
-
-type ChangeShowOfCounterAT = {
-	type: 'CHANGE_SHOW_OF_COUNTER',
-}
-
-type ActionsType = ChangeMaxValueOfCounterAT | ChangeMinValueOfCounterAT | ChangeShowOfCounterAT
-
-export type CounterSettingsT = {
-	maxValue: number
-	minValue: number
-	show: boolean
-}
+import {
+	ActionsType,
+	ChangeMaxValueOfCounterAT,
+	ChangeMinValueOfCounterAT,
+	ChangeShowOfCounterAT,
+	CounterSettingsT
+} from '../../types/types'
 
 const initialState: CounterSettingsT = {
 	maxValue: 5,
 	minValue: 0,
 	show: false
 }
+
 
 export const counterSettingsReducer = (state: CounterSettingsT = initialState, action: ActionsType): CounterSettingsT => {
 	switch (action.type) {
