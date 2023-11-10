@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { AppRootStoreType } from '../../../../store/store'
-import { CounterValueT, IncrementCounterTC, RemoveScoreCounterTC } from '../../../../store/reducers/counterValueReducer'
+import {
+	ChangeScoreCounterAC,
+	CounterValueT,
+	RemoveScoreCounterAC
+} from '../../../../store/reducers/counterValueReducer'
 import { CounterSettingsT } from '../../../../types/types'
 
 export const useIncBlock = () => {
@@ -10,14 +14,12 @@ export const useIncBlock = () => {
 
 	const incScore = () => {
 		if (score < maxValue) {
-			// @ts-ignore
-			dispatch(IncrementCounterTC())
+			dispatch(ChangeScoreCounterAC(score + 1))
 		}
 	}
 
 	const removeScore = () => {
-		// @ts-ignore
-		dispatch(RemoveScoreCounterTC())
+		dispatch(RemoveScoreCounterAC(minValue))
 	}
 
 	return { score, maxValue, minValue, incScore, removeScore }
