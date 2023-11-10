@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const ButtonStyled = styled.button`
-  width: 50%;
+  width: 40%;
   height: 50px;
 
   color: white;

@@ -5,6 +5,8 @@ import { useCounterOne } from './hooks/useCounterOne'
 import { useDispatch } from 'react-redux'
 import { setCounterValueFromLocalStorage } from '../../store/reducers/counterValueReducer'
 import { ButtonStyled } from '../../styledComponents/Button.styled'
+import styled from 'styled-components'
+import { ContainerStyled } from '../../styledComponents/Container.styled'
 
 export const CounterOne = memo(() => {
 	const { show, onShowHandler } = useCounterOne()
@@ -20,17 +22,36 @@ export const CounterOne = memo(() => {
 		? <SetBlock />
 		: <IncBlock />
 
-
 	return (
-		<div className='wrapper'>
-			<div className='container'>
+		<ContainerStyled>
+			<CounterOneStyled>
 				{showBlock}
-				<div className='moving-block'>
+				<MovingBlock>
 					<ButtonStyled onClick={onShowHandler}>
 						{titleButton}
 					</ButtonStyled>
-				</div>
-			</div>
-		</div>
+				</MovingBlock>
+			</CounterOneStyled>
+		</ContainerStyled>
 	)
 })
+
+const CounterOneStyled = styled.div`
+  width: 40%;
+  height: 50vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 20px;
+
+  border-radius: 5px;
+  border: 2px solid cornflowerblue;
+`
+const MovingBlock = styled.div`
+  display: flex;
+  justify-content: center;
+
+  margin-top: 10px;
+`

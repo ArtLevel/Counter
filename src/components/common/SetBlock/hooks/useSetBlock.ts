@@ -30,12 +30,12 @@ export const useSetBlock = () => {
 
 	const onChangeIncBlock = () => {
 		if (maxValueInput < minValueInput) {
-			setError({ value: true, message: 'MaxValue below MinValue', field: 'MIN' })
+			setError({ value: true, message: 'Max Value below Min Value', field: 'MIN' })
 			return
 		}
 
 		if (maxValueInput < minValueInput) {
-			setError({ value: true, message: 'MaxValue below MinValue', field: 'MIN' })
+			setError({ value: true, message: 'Max Value below Min Value', field: 'MIN' })
 			return
 		}
 
