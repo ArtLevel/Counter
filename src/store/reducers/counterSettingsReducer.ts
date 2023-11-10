@@ -1,10 +1,4 @@
-import {
-	ActionsType,
-	ChangeMaxValueOfCounterAT,
-	ChangeMinValueOfCounterAT,
-	ChangeShowOfCounterAT,
-	CounterSettingsT
-} from '../../types/types'
+import { ActionsType, ChangeSettingsOfCounter, CounterSettingsForAC, CounterSettingsT } from '../../types/types'
 
 const initialState: CounterSettingsT = {
 	maxValue: 5,
@@ -15,27 +9,19 @@ const initialState: CounterSettingsT = {
 
 export const counterSettingsReducer = (state: CounterSettingsT = initialState, action: ActionsType): CounterSettingsT => {
 	switch (action.type) {
-		case 'CHANGE_MAX_VALUE_OF_COUNTER':
-			return { ...state, maxValue: action.newMaxValue }
-		case 'CHANGE_MIN_VALUE_OF_COUNTER':
-			return { ...state, minValue: action.newMinValue }
-		case 'CHANGE_SHOW_OF_COUNTER':
-			return { ...state, show: !state.show }
+		case 'CHANGE_SETTINGS_OF_COUNTER':
+			return { ...state, ...action.payload }
 		default:
 			return state
 	}
 }
 
-export const ChangeMaxValueOfCounterAC = (newMaxValue: number): ChangeMaxValueOfCounterAT => ({
-	type: 'CHANGE_MAX_VALUE_OF_COUNTER',
-	newMaxValue
+// ACTION CREATOR
+
+export const ChangeSettingOfCounterAC = (newSettings: CounterSettingsForAC): ChangeSettingsOfCounter => ({
+	type: 'CHANGE_SETTINGS_OF_COUNTER',
+	payload: {
+		...newSettings
+	}
 })
 
-export const ChangeMinValueOfCounterAC = (newMinValue: number): ChangeMinValueOfCounterAT => ({
-	type: 'CHANGE_MIN_VALUE_OF_COUNTER',
-	newMinValue
-})
-
-export const ChangeShowOfCounterAC = (): ChangeShowOfCounterAT => ({
-	type: 'CHANGE_SHOW_OF_COUNTER'
-})

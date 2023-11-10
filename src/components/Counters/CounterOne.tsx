@@ -1,11 +1,19 @@
 import { SetBlock } from '../common/SetBlock/SetBlock'
 import { IncBlock } from '../common/IncBlock/IncBlock'
 import { Button } from '../common/Button'
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useCounterOne } from './hooks/useCounterOne'
+import { useDispatch } from 'react-redux'
+import { setCounterValueFromLocalStorage } from '../../store/reducers/counterValueReducer'
 
 export const CounterOne = memo(() => {
 	const { show, onShowHandler } = useCounterOne()
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		// @ts-ignore
+		dispatch(setCounterValueFromLocalStorage())
+	}, [])
 
 	return (
 		<div className='wrapper'>

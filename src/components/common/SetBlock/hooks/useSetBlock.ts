@@ -1,12 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { AppRootStoreType } from '../../../../store/store'
-import {
-	ChangeMaxValueOfCounterAC,
-	ChangeMinValueOfCounterAC,
-	CounterSettingsT
-} from '../../../../store/reducers/counterSettingsReducer'
 import { useEffect, useState } from 'react'
 import { RemoveScoreCounterAC } from '../../../../store/reducers/counterValueReducer'
+import { CounterSettingsT } from '../../../../types/types'
+import { ChangeSettingOfCounterAC } from '../../../../store/reducers/counterSettingsReducer'
 
 export const useSetBlock = () => {
 	const dispatch = useDispatch()
@@ -26,8 +23,7 @@ export const useSetBlock = () => {
 
 	const onChangeIncBlock = () => {
 		if (!error.errorInMaxValue && !error.errorInMinValue) {
-			dispatch(ChangeMaxValueOfCounterAC(maxValueInput))
-			dispatch(ChangeMinValueOfCounterAC(minValueInput))
+			dispatch(ChangeSettingOfCounterAC({ minValue: minValueInput, maxValue: maxValueInput }))
 			dispatch(RemoveScoreCounterAC(minValueInput))
 		}
 	}
