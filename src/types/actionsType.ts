@@ -20,11 +20,12 @@ export type ChangeSettingsOfCounter = {
 }
 
 
-export type IncrementCounterAT = {
-	type: 'INCREMENT_COUNTER'
+export type ChangeScoreCounterAT = {
+	type: 'CHANGE_SCORE_COUNTER'
+	score: number
 }
 
-export type SetCounterValueSuccessAC = {
+export type SetCounterValueSuccessAT = {
 	type: 'SET_COUNTER_VALUE_SUCCESS'
 	newScore: number
 }
@@ -39,7 +40,7 @@ export type ActionsType =
 	ChangeMaxValueOfCounterAT
 	| ChangeMinValueOfCounterAT
 	| ChangeShowOfCounterAT
-	| IncrementCounterAT
+	| ChangeScoreCounterAT
 	| RemoveScoreCounterAT
-	| SetCounterValueSuccessAC
+	| SetCounterValueSuccessAT
 	| ChangeSettingsOfCounter

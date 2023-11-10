@@ -1,4 +1,4 @@
-import { ActionsType, IncrementCounterAT, RemoveScoreCounterAT, SetCounterValueSuccessAC } from '../../types/types'
+import { ActionsType, ChangeScoreCounterAT, RemoveScoreCounterAT } from '../../types/types'
 import { AppRootStoreType } from '../store'
 import { Dispatch } from 'redux'
 
@@ -10,26 +10,19 @@ const initialState: CounterValueT = {
 
 export const counterValueReducer = (state: CounterValueT = initialState, action: ActionsType): CounterValueT => {
 	switch (action.type) {
-		case 'INCREMENT_COUNTER':
-			return { ...state, score: state.score + 1 }
+		case 'CHANGE_SCORE_COUNTER':
+			return { ...state, score: action.score }
 		case 'REMOVE_SCORE_COUNTER':
 			return { ...state, score: action.minValue }
-		case 'SET_COUNTER_VALUE_SUCCESS':
-			return { ...state, score: action.newScore }
 		default:
 			return state
 	}
 }
 
-export const IncrementCounterAC = (): IncrementCounterAT => ({ type: 'INCREMENT_COUNTER' })
+export const ChangeScoreCounterAC = (score: number): ChangeScoreCounterAT => ({ type: 'CHANGE_SCORE_COUNTER', score })
 export const RemoveScoreCounterAC = (minValue: number): RemoveScoreCounterAT => ({
 	type: 'REMOVE_SCORE_COUNTER',
 	minValue
-})
-
-export const setCounterValueSuccessAC = (newScore: number): SetCounterValueSuccessAC => ({
-	type: 'SET_COUNTER_VALUE_SUCCESS',
-	newScore
 })
 
 // THUNK
@@ -38,7 +31,7 @@ export const IncrementCounterTC = () => (dispatch: Dispatch, getState: () => App
 	const currentValue = getState().counterValue.score
 
 	localStorage.setItem('value', JSON.stringify(currentValue + 1))
-	dispatch(IncrementCounterAC())
+	dispatch(ChangeScoreCounterAC(currentValue + 1))
 }
 
 export const RemoveScoreCounterTC = () => (dispatch: Dispatch, getState: () => AppRootStoreType) => {
@@ -52,6 +45,6 @@ export const setCounterValueFromLocalStorage = () => (dispatch: Dispatch) => {
 	const value = localStorage.getItem('value')
 
 	if (value) {
-		dispatch(setCounterValueSuccessAC(JSON.parse(value)))
+		dispatch(ChangeScoreCounterAC(JSON.parse(value)))
 	}
 }
