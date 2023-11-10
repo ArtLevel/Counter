@@ -8,7 +8,7 @@ body {
 }
 
 .container {
-    width: 300px;
+    width: 400px;
     height: auto;
 }
 
@@ -47,25 +47,6 @@ body {
     gap: 20px;
 }
 
-.btn {
-    width: 50%;
-    height: 50px;
-
-    color: white;
-
-    border: none;
-    border-radius: 5px;
-    background-color: cornflowerblue;
-}
-
-.btn.default {
-    background-color: gray;
-}
-
-.btn.active:hover {
-    background-color: #7fe1f0;
-}
-
 .set-block {
     display: flex;
     justify-content: center;
@@ -81,25 +62,6 @@ body {
     gap: 10px;
 
     color: white;
-}
-
-.set-block-input {
-    padding: 5px;
-    text-align: center;
-    outline: none;
-
-    border: 0;
-    color: white;
-    border-radius: 5px;
-    background-color: cornflowerblue;
-}
-
-.set-block-input.default {
-    background-color: cornflowerblue;
-}
-
-.set-block-input.error {
-    background-color: red;
 }
 
 .moving-block {

@@ -1,9 +1,12 @@
 import React, { memo } from 'react'
-import { Button } from '../Button'
 import { useIncBlock } from './hooks/useIncBlock'
+import { ButtonStyled } from '../../../styledComponents/Button.styled'
 
 export const IncBlock = memo(() => {
-	const { score, minValue, maxValue, incScore, removeScore } = useIncBlock()
+	const { score, maxValue, minValue, incScore, removeScore } = useIncBlock()
+
+	const disabledIncBtn = score >= maxValue
+	const disabledResetBtn = score === 0 || score === minValue
 
 	return (
 		<>
@@ -11,8 +14,8 @@ export const IncBlock = memo(() => {
 				{score}
 			</div>
 			<div className='wrapper-score'>
-				<Button callback={incScore} className={`btn ${score < maxValue ? 'active' : 'default'}`}>Inc</Button>
-				<Button callback={removeScore} className={`btn ${score > minValue ? 'active' : 'default'}`}>Reset</Button>
+				<ButtonStyled onClick={incScore} disabled={disabledIncBtn}>Inc</ButtonStyled>
+				<ButtonStyled onClick={removeScore} disabled={disabledResetBtn}>Reset</ButtonStyled>
 			</div>
 		</>
 	)

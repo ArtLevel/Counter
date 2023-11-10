@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react'
-import { Input } from '../Input'
-import { Button } from '../Button'
 import { useSetBlock } from './hooks/useSetBlock'
+import { InputStyled } from '../../../styledComponents/Input.styled'
+import { ButtonStyled } from '../../../styledComponents/Button.styled'
 
 interface ISetBlock {
 }
@@ -11,23 +11,24 @@ export const SetBlock: FC<ISetBlock> = memo(() => {
 		error,
 		minValueInput,
 		maxValueInput,
-		onChangeMinValueInputHandler,
-		onChangeMaxValueInputHandler,
+		disabledSetBtn,
+		onChangeInput,
 		onChangeIncBlock
 	} = useSetBlock()
+
+	const errorBlock = error.value ? <div style={{ color: 'red' }}>{error.message}</div> : ''
 
 	return (
 		<div className='set-block'>
 			<div className='set-block-active'>
-				{error.errorInMaxValue || error.errorInMinValue ? <div style={{ color: 'red' }}>Incorrect value</div> : ''}
+				{errorBlock}
 				<div>Max Value</div>
-				<Input value={maxValueInput} onChange={onChangeMaxValueInputHandler} type='number'
-				       className={`set-block-input ${error.errorInMaxValue ? 'error' : 'default'}`} />
+				<InputStyled value={maxValueInput} onChange={(e) => onChangeInput(e, 'MAX')} error={error.field === 'MAX'} />
 				<div>Min Value</div>
-				<Input value={minValueInput} onChange={onChangeMinValueInputHandler} type='number'
-				       className={`set-block-input ${error.errorInMinValue ? 'error' : 'default'}`} />
-				<Button callback={onChangeIncBlock}
-				        className={`btn ${error.errorInMaxValue || error.errorInMinValue ? 'default' : 'active'}`}>Set</Button>
+				<InputStyled value={minValueInput} onChange={(e) => onChangeInput(e, 'MIN')} error={error.field === 'MIN'}
+				/>
+				<ButtonStyled onClick={onChangeIncBlock} disabled={error.value || disabledSetBtn}
+				>Set</ButtonStyled>
 			</div>
 		</div>
 	)

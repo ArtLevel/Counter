@@ -1,9 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { AppRootStoreType } from '../../../../store/store'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { RemoveScoreCounterAC } from '../../../../store/reducers/counterValueReducer'
 import { CounterSettingsT } from '../../../../types/types'
 import { ChangeSettingOfCounterAC } from '../../../../store/reducers/counterSettingsReducer'
+
+type InputFieldT = 'MAX' | 'MIN' | ''
+
+type ErrorT = {
+	value: boolean
+	message: string
+	field: InputFieldT
+}
 
 export const useSetBlock = () => {
 	const dispatch = useDispatch()
@@ -11,55 +19,51 @@ export const useSetBlock = () => {
 
 	const [maxValueInput, setMaxValueInput] = useState(maxValue)
 	const [minValueInput, setMinValueInput] = useState(minValue)
-	const [error, setError] = useState({
-		errorInMaxValue: false,
-		errorInMinValue: false
-	})
+	const [error, setError] = useState<ErrorT>({ value: false, message: '', field: '' })
 
 	useEffect(() => {
 		setMaxValueInput(maxValue)
 		setMinValueInput(minValue)
 	}, [maxValue, minValue])
 
+	const disabledSetBtn = maxValue === maxValueInput && minValue === minValueInput
+
 	const onChangeIncBlock = () => {
-		if (!error.errorInMaxValue && !error.errorInMinValue) {
+		if (maxValueInput < minValueInput) {
+			setError({ value: true, message: 'MaxValue below MinValue', field: 'MIN' })
+			return
+		}
+
+		if (maxValueInput < minValueInput) {
+			setError({ value: true, message: 'MaxValue below MinValue', field: 'MIN' })
+			return
+		}
+
+		if (!error.value) {
 			dispatch(ChangeSettingOfCounterAC({ minValue: minValueInput, maxValue: maxValueInput }))
 			dispatch(RemoveScoreCounterAC(minValueInput))
 		}
 	}
 
-	const onChangeMaxValueInputHandler = (value: number) => {
-		if (value > minValueInput && value > 0) {
-			if (value < 1000000) setMaxValueInput(value)
-			setError(prevState => ({ ...prevState, errorInMaxValue: false }))
-			if (minValue < value && minValue >= 0) {
-				setError({ errorInMaxValue: false, errorInMinValue: false })
-			}
-			return
-		}
-		if (value < 1000000) setMaxValueInput(value)
-		setError(prevState => ({ ...prevState, errorInMaxValue: true }))
-	}
+	const onChangeInput = (e: ChangeEvent<HTMLInputElement>, typeInput: InputFieldT) => {
+		const valueOfInput = Number(e.currentTarget.value)
 
-	const onChangeMinValueInputHandler = (value: number) => {
-		if (value < maxValueInput && value >= 0) {
-			if (value < 1000000) setMinValueInput(value)
-			setError(prevState => ({ ...prevState, errorInMinValue: false }))
-			if (maxValue > value && maxValue > 0) {
-				setError({ errorInMaxValue: false, errorInMinValue: false })
-			}
-			return
+		if (typeInput === 'MAX' && valueOfInput < 1000000) {
+			setMaxValueInput(valueOfInput)
 		}
-		if (value < 1000000) setMinValueInput(value)
-		setError(prevState => ({ ...prevState, errorInMinValue: true }))
+		if (typeInput === 'MIN' && valueOfInput >= 0 && valueOfInput < 1000000) {
+			setMinValueInput(valueOfInput)
+		}
+
+		setError({ value: false, message: '', field: '' })
 	}
 
 	return {
 		error,
 		minValueInput,
 		maxValueInput,
-		onChangeMinValueInputHandler,
-		onChangeMaxValueInputHandler,
+		disabledSetBtn,
+		onChangeInput,
 		onChangeIncBlock
 	}
 }
